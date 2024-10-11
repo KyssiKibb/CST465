@@ -2,8 +2,14 @@
     --oit-yellow: #ffd224;
     --oit-blue: #003767;
     --color-white: #ffffff;
+    --color-gray: #cccccc;
 
-    background-color: lightgray;
+
+    background-color: var(--color-gray);
+}
+
+body {
+    margin: 0;
 }
 
 div.container {
@@ -22,7 +28,7 @@ header {
     font-size: 25px;
     font-family:Arial, Helvetica, sans-serif;
     color: var(--color-white);
-    height:120px
+    height:120px;
 }
 
 .group h1 {
@@ -33,19 +39,30 @@ header {
 #mainMenu {
     background-color: var(--oit-yellow);
     display:flex;
-    border-bottom: 20px solid lightgray;
+    flex-direction: row;
+    border-bottom: 20px solid var(--color-gray);
 }
 
-#mainMenu .group {
+#mainMenu ul {
  display:flex;
+ flex-grow: 1;
  list-style-type: none;
- margin: 10px; 
+ margin: 0;
+ padding: 0;
 }
 
 #mainMenu .group li {
-    margin: 0 50%;
+    flex-grow: 1;
+    flex-basis: 0;
+    text-align: center;
 }
 
+#mainMenu ul li a{
+    display:block;
+    text-decoration: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 
 main.group {
     display:grid;
@@ -73,5 +90,11 @@ main.group {
     padding-left: 7px;
     padding-right: 94px;
     padding-bottom: 5px;
+    margin: 0;
     border: solid 1px black;
+}
+
+.productlist ul {
+    margin: 0;
+    padding: 0;
 }
