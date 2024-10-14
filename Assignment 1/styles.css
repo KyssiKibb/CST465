@@ -1,0 +1,146 @@
+:root {
+    --color-oit_gold: #ffd24f;
+    --color-oit_blue: #003767;
+    --color-gray: #cdcdcd;
+    background-color: var(--color-oit_blue);
+}
+
+#CstOwl {
+    float:left;
+    height: 150px;
+    width: 250px;
+}
+
+#heading {
+    padding: 0 0 26.3px 0;
+    background-color: var(--color-oit_gold);
+}
+
+#TitleText {
+    font-size: 40px;
+    padding-left: 290px;
+    padding-top: 50px;
+}
+
+#MenuBar {
+    background-color: var(--color-gray);
+    display:flex;
+}
+
+#MenuBar ul {
+    display:flex;
+    flex-grow: 1;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#MenuBar li{
+    list-style-type: none;
+    text-align: center;
+
+    flex-basis: 0;
+}
+
+#MenuBar a {
+    display:block;
+    text-decoration: none;
+    color: black;
+    padding: 10px 10px 10px 10px;
+    margin-right: 90px;
+    margin-left: 20px;
+    width: 100px;
+
+}
+
+#FormArea {
+    background-color: white;
+    display:flex;
+    flex-direction: column;
+    padding: 0 0 0 10px;
+    margin: 0;
+}
+
+.FormData {
+    display:grid;
+    grid-template-columns: 50% 50%;
+    column-gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+input {
+    width: 150px;
+    margin-bottom: 25px;
+    margin-top: 5px;
+}
+
+select {
+    margin-bottom: 25px;
+}
+
+#StudentID {
+    width: 80px;
+}
+
+#UserType {
+    width: 100px;
+    height: 20px;
+}
+
+
+#Biography {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: 95%;
+    height: 35px;
+}
+
+#CourseInfo {
+    display:grid;
+    grid-template-columns: 25% 25% 50%;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    column-gap: 15px;
+}
+
+#CoursePrefix {
+    grid-column: 1;
+    width: 50px;
+}
+
+#CourseNumber {
+    grid-column:2;
+    width: 50px;
+}
+
+#CourseDescription {
+    grid-column:3;
+    width: 200px;
+}
+
+#Submit {
+    width: 60px;
+}
+
+#Nickname {
+    display:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+footer {
+    color: white;
+    font-size: 18px;
+    margin-top: -18px; /*why do i need this?*/
+}

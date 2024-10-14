@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Assignment 1</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./styles.css">
+    </head>
+    <body>
+        <header id="heading">
+            <img id="CstOwl" src="./CSET_OWL.jpg">
+            <h1 id="TitleText">Assignment 1</h1>
+        </header>
+        <nav id="MenuBar">
+            <ul class="group">
+                <li><a id="link1" href="https://www.oit.edu/"><strong>Oregon Tech</strong></a></li>
+                <li><a id="link2" href="https://www.oit.edu/"><strong>CSET</strong></a></li>
+            </ul>
+        </nav>
+        <main id="FormArea">
+            <h2>About You</h2>
+            <form class="FormData" action="https://otapp-cstwebdev.azurewebsites.net/" method="POST">
+                <label for="StudentID" >Student ID</label>
+                <label for="Name">Name</label>
+                <input id="StudentID" name="StudentID" type="text" maxlength="9" placeholder="918...">
+                <input id="Name" name="Name" type="text">
+
+                <label for="EmailAddress">Email Address</label>
+                <label for="Hobby">Hobby</label>
+                <input id="EmailAddress" name="EmailAddress" type="text">
+                <input id="Hobby" name="Hobby" type="text">
+
+                <label for="UserType">User Type</label>
+                <label for="Band">Band</label>
+                <select id="UserType" name="UserType">
+                    <option>Student</option>
+                </select>
+                <input id="Band" name="Band" type="text">
+
+                <label for="Biography">Biography</label>
+                <input id="Biography" name="Biography" type="text">
+
+                <section id="CourseInfo">
+                    <label for="CoursePrefix">Course Prefix</label>
+                    <label for="CourseNumber">Course Number</label>
+                    <label for="CourseDescription">Course Description</label>
+    
+                    <input id="CoursePrefix" name="CoursePrefix" type="text" maxlength="4">
+                    <input id="CourseNumber" name="CourseNumber" type="text" maxlength="3">
+                    <input id="CourseDescription" name="CourseDescription" type="text">
+                </section>
+
+
+
+                <input id="Submit" type="submit" value="Submit">
+                <input id="Nickname" name="Nickname" type="text">
+                
+
+            </form>
+        </main>
+        <footer>
+            <p>&copy; CSET, All Rights Reserved</p>
+        </footer>
+    </body>
+</html>
