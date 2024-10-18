@@ -1,0 +1,17 @@
+@model Lab4.Objects.ChoreWorkforce
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Chore Laborers</title>
+    </head>
+    <body>
+        <h1>Chore Laborers</h1>
+        <ul>
+        @foreach(var laborer in Model.Laborers)
+        {
+            <li>@laborer.Name is @laborer.Age years old and ranks a @laborer.Difficulty on the difficulty scale</li>
+        } 
+        </ul>
+    </body>
+</html>

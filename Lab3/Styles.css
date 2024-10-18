@@ -64,7 +64,7 @@ header {
     padding-bottom: 10px;
 }
 
-main.group {
+main {
     display:grid;
     grid-template-columns: 30% 70%;
     background-color: var(--color-white);
@@ -79,13 +79,13 @@ main.group {
     margin-left: -30px;
 }
 
-.productlist .group {
+.productlist ul {
     display:flex;
     list-style-type: none;
     
 }
 
-.productlist .group li {
+.productlist ul li {
 
     padding-left: 7px;
     padding-right: 94px;
