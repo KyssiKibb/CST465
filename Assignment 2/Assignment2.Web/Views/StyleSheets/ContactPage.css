@@ -1,0 +1,4 @@
+:root {
+    --color-oit_blue: #003767;
+    background-color: var(--color-oit_blue);
+}
