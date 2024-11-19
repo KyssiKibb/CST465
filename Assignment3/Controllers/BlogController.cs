@@ -8,26 +8,28 @@ namespace Assignment3.Controllers
 	{
 		private readonly IConfiguration _Config;
 
-		IDataEntityRepository<BlogPost> post;
+		private IDataEntityRepository<BlogPost> post;
 
-		BlogController(IConfiguration configuration)
+		public BlogController(IConfiguration configuration)
 		{
 			_Config = configuration;
 			post = new BlogDBRepository(_Config);
 			
 		}
-		[Route("Blog/Index")]
+		[Route("Index")]
+		[Route("")]
 		public IActionResult Index()
 		{
 			List<BlogPost> posts = post.GetList();
 			return View(posts);
 		}
-		[Route("Blog/Add")]
+		[Route("Add")]
 		public IActionResult Add()
 		{
 			BlogPostModel model = new BlogPostModel();
 			return View(model);
 		}
+		[Route("Add")]
 		[HttpPost]
 		public IActionResult Add(BlogPostModel blogModel)
 		{
@@ -46,7 +48,7 @@ namespace Assignment3.Controllers
 			}
 			return View(blogModel);
 		}
-
+		[Route("Edit")]
 		public IActionResult Edit(int id)
 		{
 			BlogPost blog = post.Get(id);
@@ -59,6 +61,7 @@ namespace Assignment3.Controllers
 			};
 			return View(model);
 		}
+		[Route("Edit")]
 		[HttpPost]
 		public IActionResult Edit(BlogPostModel blogModel)
 		{

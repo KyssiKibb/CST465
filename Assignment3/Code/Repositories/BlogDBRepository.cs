@@ -17,12 +17,12 @@ namespace Assignment3
 
 		BlogPost IDataEntityRepository<BlogPost>.Get(int id)
 		{
-			string? connectionString = _configuration["DB_BlogPosts"];
+			string? connectionString = _configuration["ConnectionStrings:DB_BlogPosts"];
 			if (connectionString == null)
 			{
 				throw new Exception();
 			}
-			string query = "SELECT * FROM dbo.BlogPost WHERE ID = @id";
+			string query = "SELECT * FROM [dbo].[BlogPost] WHERE ID = @id";
 			try
 			{
 				using (SqlConnection conn = new SqlConnection(connectionString))
@@ -40,9 +40,9 @@ namespace Assignment3
 								if (reader.Read())
 								{
 									model.ID = reader.GetInt32(0);
-									model.Author = reader.GetString(1);
-									model.Title = reader.GetString(2);
-									model.Content = reader.GetString(3);
+									model.Title = reader.GetString(1);
+									model.Content = reader.GetString(2);
+									model.Author = reader.GetString(3);
 									model.Timestamp = reader.GetDateTime(4);
 								}
 								return model;
@@ -60,12 +60,12 @@ namespace Assignment3
 
 		void IDataEntityRepository<BlogPost>.Save(BlogPost entity)
 		{
-			string? connectionString = _configuration["DB_BlogPosts"];
+			string? connectionString = _configuration["ConnectionStrings:DB_BlogPosts"];
 			if (connectionString == null)
 			{
 				throw new Exception();
 			}
-			string query = "INSERT INTO dbo.BlogPost(ID, Title, Content, Author, Timestamp) VALUES(@id, @title, @content, @author, @timestamp)";
+			string query = "INSERT INTO [dbo].[BlogPost] (ID, Title, Content, Author, Timestamp) VALUES(@id, @title, @content, @author, @timestamp)";
 			try
 			{
 				using (SqlConnection conn = new SqlConnection(connectionString))
@@ -77,9 +77,9 @@ namespace Assignment3
 						{
 							cmd.CommandText = query;
 							cmd.Parameters.AddWithValue("@id", entity.ID);
-							cmd.Parameters.AddWithValue("@author", entity.Author);
 							cmd.Parameters.AddWithValue("@title", entity.Title);
 							cmd.Parameters.AddWithValue("@content", entity.Content);
+							cmd.Parameters.AddWithValue("@author", entity.Author);
 							cmd.Parameters.AddWithValue("@timestamp", entity.Timestamp);
 							cmd.ExecuteNonQuery();
 						}
@@ -95,12 +95,12 @@ namespace Assignment3
 
 		List<BlogPost> IDataEntityRepository<BlogPost>.GetList()
 		{
-			string? connectionString = _configuration["DB_BlogPosts"];
+			string? connectionString = _configuration["ConnectionStrings:DB_BlogPosts"];
 			if (connectionString == null)
 			{
 				throw new Exception();
 			}
-			string query = "SELECT * FROM dbo.BlogPost";
+			string query = "SELECT * FROM [dbo].[BlogPost]";
 			try
 			{
 				using (SqlConnection conn = new SqlConnection(connectionString))
