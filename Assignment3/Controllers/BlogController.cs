@@ -3,6 +3,7 @@ using System.Configuration;
 
 namespace Assignment3.Controllers
 {
+	[Route("Blog")]
 	public class BlogController : Controller
 	{
 		private readonly IConfiguration _Config;
@@ -15,13 +16,13 @@ namespace Assignment3.Controllers
 			post = new BlogDBRepository(_Config);
 			
 		}
-
+		[Route("Blog/Index")]
 		public IActionResult Index()
 		{
 			List<BlogPost> posts = post.GetList();
 			return View(posts);
 		}
-
+		[Route("Blog/Add")]
 		public IActionResult Add()
 		{
 			BlogPostModel model = new BlogPostModel();

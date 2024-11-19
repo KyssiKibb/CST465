@@ -7,33 +7,30 @@
 <form action="/Registration" method="post">
     <div class="row">
         <div class="form-group col-12 col-sm-6">
-            <label for="FirstName">First Name</label>
-            <input type="text" class="form-control" id="FirstName" name="FirstName" />
-            
-            @Html.ValidationMessageFor(m => m.FirstName)
+            <label asp-for="FirstName">FirstName</label>
+            <input type="text" class="form-control"/>
+            <span asp-validation-for="FirstName"></span>
         </div>
         <div class="form-group col-12 col-sm-6">
-            <label for="LastName">Last Name</label>
-            <input type="text" class="form-control" id="LastName" name="LastName" />
-            @Html.ValidationMessageFor(m => m.LastName)
+            <label asp-for="LastName">LastName</label>
+            <input type="text" class="form-control"/>
+            <span asp-validation-for="LastName"></span>
         </div>
     </div>
     <div class="form-group">
-        <label for="EmailAddress">Email Address</label>
-        <input type="text" class="form-control" id="EmailAddress" name="EmailAddress" />
-        
-        @Html.ValidationMessageFor(m => m.EmailAddress)
+        <label asp-for="EmailAddress">EmailAddress</label>
+        <input type="text" class="form-control"/>
+        <span asp-validation-for="EmailAddress"></span>
     </div>
     <div class="form-group">
-        <label for="PhoneNumber"></label>
-        <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" />
-        
-        @Html.ValidationMessageFor(m => m.PhoneNumber)
+        <label asp-for="PhoneNumber">Number</label>
+        <input type="text" class="form-control"/>
+        <span asp-validation-for="PhoneNumber"></span>
     </div>
     
     <div class="form-group">
-        <label for="Address">Address</label>
-        <input type="text" class="form-control" id="Address" name="Address" />
+        <label asp-for="Address">Address</label>
+        <input type="text" class="form-control"/>
         
     </div>
     <div class="row">
@@ -43,15 +40,8 @@
             
         </div>
         <div class="form-group col-12 col-sm-4">
-            <label for="State">State</label>
-            <select  class="form-select">
-                <option value="OR">Oregon</option>
-                <option value="CA">California</option>
-                <option value="WA">Washington</option>
-                <option value="TX">Texas</option>
-                <option value="TN">Tennessee</option>
-            </select>
-            
+            <label></label>
+            <select  class="form-select" asp-for="StateList" asp-items="Model.StateList"></select>
         </div>
         <div class="form-group col-12 col-sm-4">
             <label for="ZipCode">Zip Code</label>

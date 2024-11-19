@@ -1,0 +1,36 @@
+{
+  "MidtermExam": {
+    "Questions": [
+      {
+        "ID": 1,
+        "QuestionType": "TrueFalseQuestion",
+        "Question": "The current iteration of .NET is platform-independent"
+      },
+      
+      {
+        "ID": 2,
+        "QuestionType": "ShortAnswerQuestion",
+        "Question": "List the following in the order of precedence (highest to lowest) for defining CSS styles: internal stylesheet, browser stylesheet, external stylesheet, inline style"
+      },
+      
+      {
+        "ID": 3,
+        "QuestionType": "LongAnswerQuestion",
+        "Question": "What is the purpose of the DOCTYPE declaration at the top of a web page"
+      },
+      
+      {
+        "ID": 4,
+        "QuestionType": "MultipleChoiceQuestion",
+        "Question": "For accessibility, all controls that ask for user input must have an associated:",
+        "Choices": [
+          "label",
+          "validator",
+          "style",
+          "All of the above"
+        ]
+      }
+      
+    ]
+  }
+}
