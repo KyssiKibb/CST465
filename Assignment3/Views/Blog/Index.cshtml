@@ -1,0 +1,15 @@
+﻿@model List<BlogPost>
+@{
+    ViewBag.Title = "Edit a Blog Post";
+}
+<h1>Edit a Blog Post</h1>
+
+<a asp-action="Add" asp-controller="Blog">Add Post</a>
+
+@foreach (BlogPost Blog in Model)
+{
+    <div>
+        <h2>Title: @Blog.Title</h2>
+        <a asp-action="Edit" asp-controller="Blog" asp-route-id="@(Blog.ID)">Edit Post</a>
+    </div>
+}

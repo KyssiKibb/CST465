@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Configuration;
 
 namespace Assignment3.Controllers
 {
@@ -17,27 +18,63 @@ namespace Assignment3.Controllers
 
 		public IActionResult Index()
 		{
-			return View(post);
+			List<BlogPost> posts = post.GetList();
+			return View(posts);
 		}
 
 		public IActionResult Add()
 		{
-			return View(post);
+			BlogPostModel model = new BlogPostModel();
+			return View(model);
 		}
-
+		[HttpPost]
 		public IActionResult Add(BlogPostModel blogModel)
 		{
-			return View(post);
+			if (ModelState.IsValid)
+			{
+				BlogPost blog = new()
+				{
+					ID = blogModel.ID,
+					Author = blogModel.Author,
+					Title = blogModel.Title,
+					Content = blogModel.Content,
+					Timestamp = DateTime.Now,
+				};
+				post.Save(blog);
+				return RedirectToAction("Index");
+			}
+			return View(blogModel);
 		}
 
 		public IActionResult Edit(int id)
 		{
-			return View(post);
+			BlogPost blog = post.Get(id);
+			BlogPostModel model = new()
+			{
+				ID=blog.ID,
+				Author = blog.Author,
+				Title = blog.Title,
+				Content = blog.Content,
+			};
+			return View(model);
 		}
-
+		[HttpPost]
 		public IActionResult Edit(BlogPostModel blogModel)
 		{
-			return View(post);
+			if (ModelState.IsValid)
+			{
+				BlogPost blog = new()
+				{
+					ID = blogModel.ID,
+					Author = blogModel.Author,
+					Title = blogModel.Title,
+					Content = blogModel.Content,
+					Timestamp = DateTime.Now,
+				};
+				post.Save(blog);
+				return RedirectToAction("Index");
+			}
+			return View(blogModel);
 		}
 
 	}
