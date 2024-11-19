@@ -24,12 +24,13 @@ namespace Assignment3.Controllers
 			return View(posts);
 		}
 		[Route("Add")]
+		[HttpGet]
 		public IActionResult Add()
 		{
 			BlogPostModel model = new BlogPostModel();
 			return View(model);
 		}
-		[Route("Add")]
+		[Route("Add/{id}")]
 		[HttpPost]
 		public IActionResult Add(BlogPostModel blogModel)
 		{
@@ -49,6 +50,7 @@ namespace Assignment3.Controllers
 			return View(blogModel);
 		}
 		[Route("Edit")]
+		[HttpGet]
 		public IActionResult Edit(int id)
 		{
 			BlogPost blog = post.Get(id);
@@ -61,7 +63,7 @@ namespace Assignment3.Controllers
 			};
 			return View(model);
 		}
-		[Route("Edit")]
+		[Route("Edit/{ID}")]
 		[HttpPost]
 		public IActionResult Edit(BlogPostModel blogModel)
 		{

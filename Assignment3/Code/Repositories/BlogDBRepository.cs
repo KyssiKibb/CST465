@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
@@ -17,127 +18,67 @@ namespace Assignment3
 
 		BlogPost IDataEntityRepository<BlogPost>.Get(int id)
 		{
-			string? connectionString = _configuration["ConnectionStrings:DB_BlogPosts"];
-			if (connectionString == null)
+			using SqlConnection connection = new SqlConnection(_configuration["ConnectionStrings:DB_BlogPosts"]);
+			using SqlCommand command = new SqlCommand();
+			command.CommandText = "SELECT * FROM BlogPost WHERE ID = @id";
+			command.Parameters.AddWithValue("@id", id);
+			command.Connection.Open();
+
+			using SqlDataReader reader = command.ExecuteReader();
+
+			BlogPost model = new BlogPost();
+			if (reader.Read())
 			{
-				throw new Exception();
+				model.ID = reader.GetInt32(0);
+				model.Title = reader.GetString(1);
+				model.Content = reader.GetString(2);
+				model.Author = reader.GetString(3);
+				model.Timestamp = reader.GetDateTime(4);
 			}
-			string query = "SELECT * FROM [dbo].[BlogPost] WHERE ID = @id";
-			try
-			{
-				using (SqlConnection conn = new SqlConnection(connectionString))
-				{
-					conn.Open();
-					if (conn.State == System.Data.ConnectionState.Open)
-					{
-						using (SqlCommand cmd = conn.CreateCommand())
-						{
-							cmd.CommandText = query;
-							cmd.Parameters.AddWithValue("@id", id);
-							using (SqlDataReader reader = cmd.ExecuteReader())
-							{
-								BlogPost model = new BlogPost();
-								if (reader.Read())
-								{
-									model.ID = reader.GetInt32(0);
-									model.Title = reader.GetString(1);
-									model.Content = reader.GetString(2);
-									model.Author = reader.GetString(3);
-									model.Timestamp = reader.GetDateTime(4);
-								}
-								return model;
-							}
-						}
-					}
-				}
-			}
-			catch (Exception eSql)
-			{
-				Debug.WriteLine("Exception: " + eSql.Message);
-			}
-			throw new Exception();
+			return model;
 		}
 
 		void IDataEntityRepository<BlogPost>.Save(BlogPost entity)
 		{
-			string? connectionString = _configuration["ConnectionStrings:DB_BlogPosts"];
-			if (connectionString == null)
-			{
-				throw new Exception();
-			}
-			string query = "INSERT INTO [dbo].[BlogPost] (ID, Title, Content, Author, Timestamp) VALUES(@id, @title, @content, @author, @timestamp)";
-			try
-			{
-				using (SqlConnection conn = new SqlConnection(connectionString))
-				{
-					conn.Open();
-					if (conn.State == System.Data.ConnectionState.Open)
-					{
-						using (SqlCommand cmd = conn.CreateCommand())
-						{
-							cmd.CommandText = query;
-							cmd.Parameters.AddWithValue("@id", entity.ID);
-							cmd.Parameters.AddWithValue("@title", entity.Title);
-							cmd.Parameters.AddWithValue("@content", entity.Content);
-							cmd.Parameters.AddWithValue("@author", entity.Author);
-							cmd.Parameters.AddWithValue("@timestamp", entity.Timestamp);
-							cmd.ExecuteNonQuery();
-						}
-					}
-				}
-			}
-			catch (Exception eSql)
-			{
-				Debug.WriteLine("Exception: " + eSql.Message);
-			}
-			throw new Exception();
+			
+			using SqlConnection connection = new SqlConnection(_configuration["ConnectionStrings:DB_BlogPosts"]);
+			using SqlCommand command = new SqlCommand("BlogPost_BlogPost_InsertUpdate", connection);
+			command.CommandType = CommandType.StoredProcedure;
+			command.Connection.Open();
+
+			command.Parameters.AddWithValue("@ID", entity.ID);
+			command.Parameters.AddWithValue("@Title", entity.Title);
+			command.Parameters.AddWithValue("@Content", entity.Content);
+			command.Parameters.AddWithValue("@Author", entity.Author);
+			command.Parameters.AddWithValue("@Timestamp", entity.Timestamp);
+
+			command.ExecuteNonQuery();
 		}
 
 		List<BlogPost> IDataEntityRepository<BlogPost>.GetList()
 		{
-			string? connectionString = _configuration["ConnectionStrings:DB_BlogPosts"];
-			if (connectionString == null)
-			{
-				throw new Exception();
-			}
-			string query = "SELECT * FROM [dbo].[BlogPost]";
-			try
-			{
-				using (SqlConnection conn = new SqlConnection(connectionString))
-				{
-					conn.Open();
-					if (conn.State == System.Data.ConnectionState.Open)
-					{
-						using (SqlCommand cmd = conn.CreateCommand())
-						{
-							cmd.CommandText = query;
-							using (SqlDataReader reader = cmd.ExecuteReader())
-							{
-								List<BlogPost> bloglist = new List<BlogPost>();
-								while (reader.Read())
-								{
-									BlogPost blog = new()
-									{
-										ID = reader.GetInt32(0),
-										Title = reader.GetString(1),
-										Content = reader.GetString(2),
-										Author = reader.GetString(3),
-										Timestamp = reader.GetDateTime(4),
-									};
-									bloglist.Add(blog);
+			List<BlogPost> blogPosts = new List<BlogPost>();
+			using SqlConnection connection = new SqlConnection(_configuration["ConnectionStrings:DB_BlogPosts"]);
+			using SqlCommand command = new SqlCommand("BlogPost_GetList", connection);
+			command.CommandType = CommandType.StoredProcedure;
+			command.Connection.Open();
+			using SqlDataReader reader = command.ExecuteReader();
 
-								}
-								return bloglist;
-							}
-						}
-					}
-				}
-			}
-			catch (Exception eSql)
+			while (reader.Read())
 			{
-				Debug.WriteLine("Exception: " + eSql.Message);
+				BlogPost blog = new()
+				{
+					ID = reader.GetInt32(0),
+					Title = reader.GetString(1),
+					Content = reader.GetString(2),
+					Author = reader.GetString(3),
+					Timestamp = reader.GetDateTime(4),
+				};
+				blogPosts.Add(blog);
 			}
-			throw new Exception();
+
+			return blogPosts;
 		}
+
 	}
 }
