@@ -8,7 +8,7 @@ namespace Assignment3.Controllers
 	{
 		private readonly IConfiguration _Config;
 
-		private IDataEntityRepository<BlogPost> post;
+		private readonly IDataEntityRepository<BlogPost> post;
 
 		public BlogController(IConfiguration configuration)
 		{

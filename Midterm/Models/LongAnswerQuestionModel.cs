@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Midterm.Models
+namespace Midterm
 {
 	public class LongAnswerQuestionModel : TestQuestionModel
 	{

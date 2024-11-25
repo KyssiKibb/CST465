@@ -1,0 +1,10 @@
+@using Midterm
+@model List<TestQuestionModel>
+@Html.ValidationSummary()
+<h1>Results Page</h1>
+@for (int i = 0; i < Model.Count; i++)
+{
+    <h2>@Model[i].ID: @Model[i].Question</h2>
+    <h2>Answer: @Model[i].Answer</h2>
+    <br />
+}

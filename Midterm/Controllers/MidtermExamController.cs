@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Midterm.Models;
+//using Midterm.Models;
 namespace Midterm;
 
 //TODO:  Is something missing here? 
@@ -27,21 +27,30 @@ public class MidtermExamController : Controller
         List<TestQuestionModel> questionModels = GetQuestionModels();
         return View(questionModels);
     }
-    [Route("SubmitTest")]
+    [Route("TakeTest")]
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult TakeTest(List<TestQuestionModel> model)
     {
         List<TestQuestionModel> questionModels = GetQuestionModels();
         //TODO: At this point you will only have the raw answers in the model.  Questions did not get posted back.
         //You will need to get the questions again from GetQuestionModels(), then set the answer values on the retrieved list by
         //  matching the two lists based on ID
+
+        for (int i = 0; i < model.Count; ++i)
+        {
+            model[i].Question = questionModels[i].Question;
+            model[i].ID = questionModels[i].ID;
+        }
+
         if(!ModelState.IsValid)
         {
             return View(questionModels);
         }
 
         //TODO: Change the below so that it loads the DisplayResults view, passing in the model
-        return View();
+
+		return View("DisplayResults", model);
         
     }
     private List<TestQuestionModel> GetQuestionModels()
@@ -71,8 +80,15 @@ public class MidtermExamController : Controller
                 questionModels.Add(laQuestion);
             }
             else if (question.QuestionType == "MultipleChoiceQuestion")
-            { 
-            }
+            {
+                MultipleChoiceQuestionModel mcQuestion = new MultipleChoiceQuestionModel();
+				mcQuestion.ID = question.ID;
+				mcQuestion.Question = question.Question;
+                mcQuestion.Choices = new();
+                mcQuestion.Choices.AddRange(question.Choices);
+
+				questionModels.Add(mcQuestion);
+			}
             
             //TODO: Implement creating the rest of the question models here. Multiple choice questions will require setting the choices.
         }

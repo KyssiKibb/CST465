@@ -42,7 +42,7 @@ namespace Assignment3
 		{
 			
 			using SqlConnection connection = new SqlConnection(_configuration["ConnectionStrings:DB_BlogPosts"]);
-			using SqlCommand command = new SqlCommand("BlogPost_BlogPost_InsertUpdate", connection);
+			using SqlCommand command = new SqlCommand("BlogPost_InsertUpdate", connection);
 			command.CommandType = CommandType.StoredProcedure;
 			command.Connection.Open();
 
