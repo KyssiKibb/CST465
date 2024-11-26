@@ -11,7 +11,7 @@ namespace Midterm
     {
         public int ID { get; set; }
         public string? Question { get; set; }
-        public List<string>? Choices { get; set; }
+        //public List<string>? Choices { get; set; }
         [Required]
         public virtual string Answer { get; set; }
     }
