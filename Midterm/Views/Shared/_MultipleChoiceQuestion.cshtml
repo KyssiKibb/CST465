@@ -1,0 +1,10 @@
+﻿@model MultipleChoiceQuestionModel
+
+<h2>@Model.ID: @Model.Question</h2>
+
+@foreach (string choice in Model.Choices)
+{
+    <input type="radio" asp-for="@(Model.Answer)" value="@choice" id="@Model.ID: @choice" />
+    <label for="choice-@choice">@choice</label>
+}
+<span asp-validation-for="@Model.Answer" asp-route-id="Model.ID"></span>

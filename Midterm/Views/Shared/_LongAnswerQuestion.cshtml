@@ -1,0 +1,6 @@
+﻿@model LongAnswerQuestionModel
+
+<h2 asp-for="@Model.ID" style="display:hidden"></h2>
+<h2>@Model.ID: @Model.Question</h2>
+<textarea asp-for="@Model.Answer" class="form-control"></textarea>
+<span asp-route-id="@Model.ID" asp-validation-for="@Model.Answer"></span>
