@@ -6,7 +6,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.Configure<HeaderOptions>(builder.Configuration.GetSection("Headers"));
 
 var app = builder.Build();
+
 //app.UseConfiggedHeaders();
-app.MapDefaultControllerRoute();
 app.UseOregonTechRedirect();
+app.MapDefaultControllerRoute();
+
 app.Run();

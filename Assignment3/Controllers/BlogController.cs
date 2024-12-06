@@ -49,7 +49,7 @@ namespace Assignment3.Controllers
 			}
 			return View(blogModel);
 		}
-		[Route("Edit/{ID}")]
+		[Route("Edit/{id}")]
 		[HttpGet]
 		public IActionResult Edit(int id)
 		{

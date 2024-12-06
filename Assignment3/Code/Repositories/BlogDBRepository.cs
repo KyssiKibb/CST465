@@ -20,6 +20,7 @@ namespace Assignment3
 		{
 			using SqlConnection connection = new SqlConnection(_configuration["ConnectionStrings:DB_BlogPosts"]);
 			using SqlCommand command = new SqlCommand();
+			command.Connection = connection;
 			command.CommandText = "SELECT * FROM BlogPost WHERE ID = @id";
 			command.Parameters.AddWithValue("@id", id);
 			command.Connection.Open();
@@ -29,11 +30,11 @@ namespace Assignment3
 			BlogPost model = new BlogPost();
 			if (reader.Read())
 			{
-				model.ID = reader.GetInt32(0);
-				model.Title = reader.GetString(1);
-				model.Content = reader.GetString(2);
-				model.Author = reader.GetString(3);
-				model.Timestamp = reader.GetDateTime(4);
+				model.ID = reader.GetInt32("ID");
+				model.Title = reader.GetString("Title");
+				model.Content = reader.GetString("Content");
+				model.Author = reader.GetString("Author");
+				model.Timestamp = reader.GetDateTime("Timestamp");
 			}
 			return model;
 		}
@@ -46,11 +47,12 @@ namespace Assignment3
 			command.CommandType = CommandType.StoredProcedure;
 			command.Connection.Open();
 
-			command.Parameters.AddWithValue("@ID", entity.ID);
+			if(entity.ID != 0)
+				command.Parameters.AddWithValue("@ID", entity.ID);
 			command.Parameters.AddWithValue("@Title", entity.Title);
 			command.Parameters.AddWithValue("@Content", entity.Content);
 			command.Parameters.AddWithValue("@Author", entity.Author);
-			command.Parameters.AddWithValue("@Timestamp", entity.Timestamp);
+			//command.Parameters.AddWithValue("@Timestamp", entity.Timestamp);
 
 			command.ExecuteNonQuery();
 		}

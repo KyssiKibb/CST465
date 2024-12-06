@@ -10,6 +10,7 @@
 {
     <div>
         <h2>Title: @Blog.Title</h2>
+        <p>@Blog.Content</p>
         <a asp-action="Edit" asp-controller="Blog" asp-route-id="@(Blog.ID)">Edit Post</a>
     </div>
 }
