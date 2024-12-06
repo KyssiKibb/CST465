@@ -23,7 +23,8 @@ public class RegistrationFormController : Controller
         //Check if everything validates against the model constraints
         if (!ModelState.IsValid)
         {
-            return View(model);
+			model.StateList = new SelectList(GetStates(), "Abbreviation", "Name").ToList();
+			return View(model);
         }
         return View("Success");
     }

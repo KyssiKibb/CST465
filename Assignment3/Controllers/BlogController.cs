@@ -10,10 +10,10 @@ namespace Assignment3.Controllers
 
 		private readonly IDataEntityRepository<BlogPost> post;
 
-		public BlogController(IConfiguration configuration)
+		public BlogController(IConfiguration configuration, IDataEntityRepository<BlogPost> repo)
 		{
 			_Config = configuration;
-			post = new BlogDBRepository(_Config);
+			post = repo;
 			
 		}
 		[Route("Index")]
@@ -30,7 +30,7 @@ namespace Assignment3.Controllers
 			BlogPostModel model = new BlogPostModel();
 			return View(model);
 		}
-		[Route("Add/{id}")]
+		[Route("Add")]
 		[HttpPost]
 		public IActionResult Add(BlogPostModel blogModel)
 		{
@@ -49,7 +49,7 @@ namespace Assignment3.Controllers
 			}
 			return View(blogModel);
 		}
-		[Route("Edit")]
+		[Route("Edit/{ID}")]
 		[HttpGet]
 		public IActionResult Edit(int id)
 		{
