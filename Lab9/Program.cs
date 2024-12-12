@@ -8,7 +8,7 @@ var connectionString = builder.Configuration.GetConnectionString("Lab9ContextCon
 
 builder.Services.AddDbContext<Lab9Context>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<Lab9User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<Lab9Context>();
+builder.Services.AddDefaultIdentity<Lab9User>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<Lab9Context>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -28,9 +28,10 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
 app.UseAuthentication();
+app.MapRazorPages();
 app.UseStaticFiles();
 app.MapStaticAssets();
-app.MapRazorPages();
+
 
 app.MapControllerRoute(
     name: "default",
